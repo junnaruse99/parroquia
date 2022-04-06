@@ -5,9 +5,13 @@ import Splash from './components/splash/Splash';
 import About from './components/about/About';
 import Login from './components/account/Login';
 import NewAccount from './components/account/NewAccount';
+import WarningState from './context/warning/WarningState';
+import UserState from './context/user/UserState';
 
 function App() {
   return (
+    <WarningState>
+    <UserState>
     <Router>
       <Navbar />
       <Routes>
@@ -17,6 +21,8 @@ function App() {
           <Route path="/new-account" element={<NewAccount />} />
       </Routes>
     </Router>
+    </UserState>
+    </WarningState>
     );
 }
 
