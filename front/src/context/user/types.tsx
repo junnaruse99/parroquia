@@ -43,25 +43,43 @@ export interface ICity {
 // My interfaces
 export interface IUser {
 	user_id?: number;
-	first_name?: string;
-	last_name?: string;
-	email?: string;
-	password?: string;
+	first_name: string;
+	last_name: string;
+	email: string;
+	password: string;
 	confirm_password?: string;
-	country?: string;
-	state?: string;
-	city?: string;
-	address?: string;
-	phone? : string;
-	addUser?: (user: IUser) => void
+	date_of_birth: Date;
+	gender: string;
+	country: string;
+	state: string;
+	city: string;
+	address: string;
+	phone: string;
+	family_members? : IFamilyMember[];
+	addUser?: (user: IUser) => void;
+	addFamily?: (family: IFamilyMember[]) => void;
 }
 
-export const initialUser = {
+export interface IFamilyMember {
+	family_member_id?: number;
+	first_name: string;
+	last_name: string;
+	date_of_birth: Date;
+	gender: string;
+	user_id?: number
+}
+
+export const initialUser : IUser = {
 	first_name: "",
 	last_name: "",
 	email: "",
 	password: "",
+	date_of_birth: new Date(),
+	gender: "",
 	country: "",
+	state: "",
 	city: "",
-	address: ""
+	address: "",
+	phone: "",
+	family_members: []
 }

@@ -1,20 +1,20 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import CountryCityStateInput from './forms/CountryCityStateInput';
-import { IUser } from '../../context/user/types';
+import { IUser, initialUser } from '../../context/user/types';
 import WarningContext from '../../context/warning/WarningContext';
 import UserContext from '../../context/user/UserContext';
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NewAccount = () => {
 
-    const [user, setUser] = useState<IUser>({});
+    const [user, setUser] = useState<IUser>(initialUser);
     const warning = useContext(WarningContext);
     const userContext = useContext(UserContext);
 
-    const navigate = useNavigate ();
+    const navigate = useNavigate();
 
-    const inputSave = (e : React.FormEvent<HTMLInputElement>) => {
+    const inputSave = (e : React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         setUser({
             ...user,
             [e.currentTarget.name]: e.currentTarget.value
@@ -24,9 +24,34 @@ const NewAccount = () => {
     const saveUser = (e : any) => {
         e.preventDefault();
 
+        // Validations
+        // Validate that fields are not empty
+        console.log(user);
+
+        if ((user.first_name?.length === 0) || (user.last_name?.length === 0) || (user.email?.length === 0) || (user.password?.length === 0) || (user.confirm_password?.length === 0) ||
+        (user.address?.length === 0) || (user.country?.length === 0) || (user.state?.length === 0) || (user.city?.length === 0) || (user.phone?.length === 0) || (user.gender?.length === 0)){
+            warning.updateWarning!({
+                description: "All fields must be filled",
+                class: "error-message"
+            })
+            window.scrollTo(0, 0);
+            return;
+        }
+
+        // Validate that passwords match
+        if (user.password !== user.confirm_password) {
+            warning.updateWarning!({
+                description: "Password does not match",
+                class: "error-message"
+            })
+            window.scrollTo(0, 0);
+            return;
+        }
+
+        // Validation of valid email is done by browser
         // Save User
         userContext.addUser!(user);
-        navigate('/')
+        navigate('/add-family');
         
     }
 
@@ -54,6 +79,18 @@ const NewAccount = () => {
         <div className="form-group">
             <label htmlFor="confirmPassword">Confirm password</label>
             <input type="password" className="form-control" id="confirmPassword" placeholder="Confirm password" onChange={inputSave} name='confirm_password'/>
+        </div>
+        <div className="form-group">
+            <label htmlFor="dateBirth">Date of birth</label>
+            <input type="date" className="form-control" id="dateBirth" placeholder="Date of birth" onChange={inputSave} name='date_of_birth'/>
+        </div>
+        <div className="form-group">
+            <label htmlFor="gender">Gender</label>
+            <select id="gender" name='gender' onChange={inputSave}>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Unknown</option>
+            </select>
         </div>
         <div className="form-group">
             <label htmlFor="address">Address Line 1</label>
