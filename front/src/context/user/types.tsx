@@ -75,7 +75,7 @@ export const initialUser : IUser = {
 	email: "",
 	password: "",
 	date_of_birth: new Date(),
-	gender: "",
+	gender: "Male",
 	country: "",
 	state: "",
 	city: "",
