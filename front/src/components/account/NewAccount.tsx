@@ -26,7 +26,6 @@ const NewAccount = () => {
 
         // Validations
         // Validate that fields are not empty
-        console.log(user);
 
         if ((user.first_name?.length === 0) || (user.last_name?.length === 0) || (user.email?.length === 0) || (user.password?.length === 0) || (user.confirm_password?.length === 0) ||
         (user.address?.length === 0) || (user.country?.length === 0) || (user.state?.length === 0) || (user.city?.length === 0) || (user.phone?.length === 0) || (user.gender?.length === 0)){

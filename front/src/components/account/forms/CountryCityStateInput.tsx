@@ -34,11 +34,13 @@ const CountryCityStateInput = ({divClass, inputClass, user, setUser} : {divClass
         })
     }
     
+    console.log(user);
+    
     return (
         <>
         <div className={divClass}>
             <label htmlFor="country">Country</label>
-            <select name="country" id="country" className={inputClass} onChange={selectCountry}>
+            <select name="country" id="country" className={inputClass} onChange={selectCountry} defaultValue={user.country} >
                 {Country.getAllCountries().map((country : ICountry) => (
                     <option value={country.isoCode} key={country.isoCode}>{country.name}</option>
                 ))}
@@ -46,7 +48,7 @@ const CountryCityStateInput = ({divClass, inputClass, user, setUser} : {divClass
         </div>
         <div className={divClass}>
             <label htmlFor="state">State</label>
-            <select name="state" id="state" className={inputClass} onChange={selectState}>
+            <select name="state" id="state" className={inputClass} onChange={selectState} defaultValue={user.state}>
                 {states.map((state : IState) => (
                     <option value={state.isoCode} key={state.isoCode}>{state.name}</option>
                 ))}
@@ -54,7 +56,7 @@ const CountryCityStateInput = ({divClass, inputClass, user, setUser} : {divClass
         </div>
         <div className={divClass}>
             <label htmlFor="city">City</label>
-            <select name="city" id="city" className={inputClass} onChange={selectCity}>
+            <select name="city" id="city" className={inputClass} onChange={selectCity} defaultValue={user.city}>
                 {cities.map((city : ICity) => (
                     <option value={city.name} key={city.name}>{city.name}</option>
                 ))}
