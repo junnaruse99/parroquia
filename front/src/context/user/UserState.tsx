@@ -1,8 +1,7 @@
-import React, { useReducer, FC, useContext } from 'react';
+import React, { useReducer, FC } from 'react';
 import UserContext from './UserContext';
 import { IUser, initialUser, IFamilyMember } from './types';
 import UserReducer from './UserReducer';
-import WarningContext from '../warning/WarningContext';
 import { ADD_USER, ADD_FAMILY } from '../../actions';
 
 const UserState: FC = props => {

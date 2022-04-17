@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IFamilyMember } from '../../../context/user/types';
 
 const FamilyForm = ({setMember, family, position} : {setMember: (family: IFamilyMember[]) => void, family: IFamilyMember[], position: number}) => {
