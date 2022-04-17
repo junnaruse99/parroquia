@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import UserContext from '../../context/user/UserContext';
-import { IUser, initialUser } from '../../context/user/types';
+import { IUser } from '../../context/user/types';
+import WarningContext from '../../context/warning/WarningContext';
 import CountryCityStateInput from './forms/CountryCityStateInput';
 import './account.css';
 
@@ -13,6 +14,7 @@ const User = () => {
         buttonText: 'Edit'
     });
     const [user, setUser] = useState<IUser>(userContext);
+    const warning = useContext(WarningContext);
     
     const inputSave = (e : React.FormEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         setUser({
@@ -28,17 +30,18 @@ const User = () => {
                 buttonText: 'Save'
             })
         } else {
-            setEditClass({
-                class: 'editUser',
-                buttonText: 'Edit'
-            });
-
-            userContext.addUser!(user);
+            if (userContext.addUser!(user)) {
+                setEditClass({
+                    class: 'editUser',
+                    buttonText: 'Edit'
+                });
+            }
         }
     }
 
     return (
         <>
+        {warning.description ? <p className={warning.class}>{warning.description}</p> : null}
         <h1>My account</h1>
         <img src='https://www.pngall.com/wp-content/uploads/5/Profile-PNG-Clipart.png' alt='User profile' width='100'/>
 
