@@ -56,7 +56,7 @@ export interface IUser {
 	address: string;
 	phone: string;
 	family_members? : IFamilyMember[];
-	addUser?: (user: IUser) => void;
+	addUser?: (user: IUser) => boolean;
 	addFamily?: (family: IFamilyMember[]) => void;
 }
 

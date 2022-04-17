@@ -24,34 +24,11 @@ const NewAccount = () => {
     const saveUser = (e : any) => {
         e.preventDefault();
 
-        // Validations
-        // Validate that fields are not empty
-
-        if ((user.first_name?.length === 0) || (user.last_name?.length === 0) || (user.email?.length === 0) || (user.password?.length === 0) || (user.confirm_password?.length === 0) ||
-        (user.address?.length === 0) || (user.country?.length === 0) || (user.state?.length === 0) || (user.city?.length === 0) || (user.phone?.length === 0) || (user.gender?.length === 0)){
-            warning.updateWarning!({
-                description: "All fields must be filled",
-                class: "error-message"
-            })
-            window.scrollTo(0, 0);
-            return;
-        }
-
-        // Validate that passwords match
-        if (user.password !== user.confirm_password) {
-            warning.updateWarning!({
-                description: "Password does not match",
-                class: "error-message"
-            })
-            window.scrollTo(0, 0);
-            return;
-        }
-
-        // Validation of valid email is done by browser
         // Save User
-        userContext.addUser!(user);
-        navigate('/add-family');
-        
+        if (userContext.addUser!(user)) {
+            navigate('/add-family');
+        };
+
     }
 
     return (
