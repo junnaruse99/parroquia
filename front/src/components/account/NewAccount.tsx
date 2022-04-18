@@ -25,7 +25,7 @@ const NewAccount = () => {
         e.preventDefault();
 
         // Save User
-        if (userContext.addUser!(user)) {
+        if (userContext.addUser!(user, true)) {
             navigate('/add-family');
         };
 

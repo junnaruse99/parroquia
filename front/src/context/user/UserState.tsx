@@ -10,13 +10,14 @@ const UserState: FC = props => {
     const [state, dispatch] = useReducer(UserReducer, initialUser);
     const warning = useContext(WarningContext);
 
-    const addUser = (user: IUser) : boolean => {
+    const addUser = (user: IUser, newUser: boolean) : boolean => {
 
         // Validations
         // Validate that fields are not empty
 
-        if ((user.first_name?.length === 0) || (user.last_name?.length === 0) || (user.email?.length === 0) || (user.password?.length === 0) || (user.confirm_password?.length === 0) ||
-        (user.address?.length === 0) || (user.country?.length === 0) || (user.state?.length === 0) || (user.city?.length === 0) || (user.phone?.length === 0) || (user.gender?.length === 0)){
+        if ((newUser && ((user.password?.length === 0) || (user.confirm_password?.length === 0))) || (user.first_name?.length === 0) || (user.last_name?.length === 0) || 
+        (user.email?.length === 0) || (user.address?.length === 0) || (user.country?.length === 0) || (user.state?.length === 0) || (user.city?.length === 0) || 
+        (user.phone?.length === 0) || (user.gender?.length === 0)) {
             warning.updateWarning!({
                 description: "All fields must be filled",
                 class: "error-message"
@@ -26,7 +27,7 @@ const UserState: FC = props => {
         }
 
         // Validate that passwords match
-        if (user.password !== user.confirm_password) {
+        if (newUser && user.password !== user.confirm_password) {
             warning.updateWarning!({
                 description: "Password does not match",
                 class: "error-message"
@@ -77,6 +78,7 @@ const UserState: FC = props => {
             city: state.city,
             address: state.address,
             phone: state.phone,
+            family_members: state.family_members,
             addUser,
             addFamily
         }}>

@@ -34,7 +34,7 @@ const AddFamily = () => {
     return (
         <form onSubmit={saveFamily}>
             {family.map((curr, idx) => (
-                <FamilyForm setMember={setFamily} family={family} key={idx} position={idx}/>
+                <FamilyForm setMember={setFamily} family={family} key={idx} position={idx} inputClass='form-control' buttonClass=''/>
             ))}
             <button type="button" className="btn btn-primary" onClick={addMember}>Add family member</button>
             <button type="submit" className="btn btn-primary">Save</button>
