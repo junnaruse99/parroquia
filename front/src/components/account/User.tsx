@@ -69,12 +69,14 @@ const User = () => {
                 famButtonClass: ''
             })
         } else {
-            setEditClass({
-                ...editClass,
-                famClass: 'editUser',
-                famButtonText: 'Edit',
-                famButtonClass: 'd-none'
-            });
+            if (userContext.addFamily!(family)) {
+                setEditClass({
+                    ...editClass,
+                    famClass: 'editUser',
+                    famButtonText: 'Edit',
+                    famButtonClass: 'd-none'
+                });
+            }
         }
     }
 
@@ -121,6 +123,7 @@ const User = () => {
             <button type='submit'>{editClass.infoButtonText}</button>
         </form>
         <hr />
+        <h1>Family Members</h1>
         <form onSubmit={editUserFam}>
             {family.map((curr, idx) => (
                     <FamilyForm setMember={setFamily} family={family} key={idx} position={idx} inputClass={`form-control ${editClass.famButtonClass}`} buttonClass={editClass.famButtonClass}/>

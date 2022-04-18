@@ -15,9 +15,9 @@ const UserState: FC = props => {
         // Validations
         // Validate that fields are not empty
 
-        if ((newUser && ((user.password?.length === 0) || (user.confirm_password?.length === 0))) || (user.first_name?.length === 0) || (user.last_name?.length === 0) || 
-        (user.email?.length === 0) || (user.address?.length === 0) || (user.country?.length === 0) || (user.state?.length === 0) || (user.city?.length === 0) || 
-        (user.phone?.length === 0) || (user.gender?.length === 0)) {
+        if ((newUser && ((user.password.length === 0) || (user.confirm_password?.length === 0))) || (user.first_name.length === 0) || (user.last_name.length === 0) || 
+        (user.email.length === 0) || (user.address.length === 0) || (user.country.length === 0) || (user.state.length === 0) || (user.city.length === 0) || 
+        (user.phone.length === 0) || (user.gender.length === 0)) {
             warning.updateWarning!({
                 description: "All fields must be filled",
                 class: "error-message"
@@ -51,8 +51,20 @@ const UserState: FC = props => {
         return true;
     }
 
-    const addFamily = (family: IFamilyMember[]) => {
+    const addFamily = (family: IFamilyMember[]) : boolean => {
 
+        // Validations
+        let validation = true;
+        for (const curr of family) {
+            if ((curr.first_name.length === 0) || (curr.last_name.length === 0) || (curr.gender.length === 0)) {
+                warning.updateWarning!({
+                    description: "All fields are mandatory",
+                    class: "error-message"
+                });
+                return false
+            }
+        }
+        
         try {
             dispatch({
                 type: ADD_FAMILY,
@@ -62,6 +74,8 @@ const UserState: FC = props => {
         } catch (e) {
             console.log(e)
         }
+
+        return true
     }
 
     return (
