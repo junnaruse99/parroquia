@@ -55,9 +55,9 @@ export interface IUser {
 	city: string;
 	address: string;
 	phone: string;
-	family_members? : IFamilyMember[];
-	addUser?: (user: IUser) => void;
-	addFamily?: (family: IFamilyMember[]) => void;
+	family_members : IFamilyMember[];
+	addUser?: (user: IUser, newUser: boolean) => boolean;
+	addFamily?: (family: IFamilyMember[]) => boolean;
 }
 
 export interface IFamilyMember {
@@ -75,7 +75,7 @@ export const initialUser : IUser = {
 	email: "",
 	password: "",
 	date_of_birth: new Date(),
-	gender: "",
+	gender: "Male",
 	country: "",
 	state: "",
 	city: "",
